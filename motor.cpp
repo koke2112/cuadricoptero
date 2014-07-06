@@ -1,6 +1,6 @@
-// Sweep
-// by BARRAGAN <http://barraganstudio.com> 
-// This example code is in the public domain.
+// 
+// by Jorge Sanchez  
+// jorge_chem_89@hotmail.com
 
 #include "cuadricoptero.h"
 #include <Servo.h> 
@@ -10,13 +10,14 @@ Servo motor1;  // create servo object to control a servo
 Servo motor2;              
 Servo motor3;
 Servo motor4;
-
+Servo motor[4];
 
 int pos = 0;    // variable to store the servo position 
 int velocidad[4];//variables para guardar la velocidad de los motores
 
 void set_speed(int mot, int sp){
-	switch (mot){
+	int aux=mot-1;
+	/*switch (mot){
 		case 1:
 			motor1.write(sp); 
 			  
@@ -33,7 +34,8 @@ void set_speed(int mot, int sp){
 			motor4.write(sp); 
 			
 			break;
-	}
+	}*/
+	motor[mot].write(sp);
 	velocidad[mot]=sp;
 
 }     
@@ -42,14 +44,15 @@ void set_speed(int mot, int sp){
    
 
 void arm(){  
-	
-  motor1.attach(9); 
-  motor2.attach(10);                                                                // Funcion del armado del ESC
-  motor1.write(0);
-  motor2.write(0);
+	int pin=8;
+	for(int i=0;i<sizeof(motor);i++){
+		motor[i].attach(pin+i);
+		motor[i].write(0);
+	}
   delay(100);
-  motor1.write(20);
-  motor2.write(20);
+  for(int i=0;i<sizeof(motor);i++){
+		motor[i].write(20);
+	}
   delay(100);
 
 }

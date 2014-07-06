@@ -11,7 +11,7 @@ void arranque(){
   delay(20000);//delay por seguridad al arrancar
   Serial.print("Arrancando..."); 
   for(int j=20;j<pot_def;j+=2){
-    for(int i=0;i<4;i++){
+    for(int i=1;i<5;i++){
       set_speed(i,j);
       delay(100);
       Serial.println(velocidad[i]);
